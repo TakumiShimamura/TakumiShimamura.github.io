@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>車種情報検索</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+    }
+    select {
+      padding: 5px;
+      font-size: 16px;
+    }
+    #carInfo {
+      margin-top: 20px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    img {
+      max-width: 300px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>車の基本情報検索</h1>
+
+  <label for="carSelect">車種を選んでください：</label>
+  <select id="carSelect">
+    <option value="">-- 選択してください --</option>
+    <option value="landcruiser">ランドクルーザー</option>
+    <option value="harrier">ハリアー</option>
+  </select>
+
+  <div id="carInfo"></div>
+
+  <script>
+    const carData = {
+      landcruiser: {
+        名前: "ランドクルーザー",
+        メーカー: "トヨタ",
+        定員: "5名",
+        車重: "2400kg",
+        サイズ: "4950×1980×1920mm",
+        パワーユニット: "V6ターボ",
+        駅力: "415PS",
+        トルク: "650Nm",
+        排氣量: "3500cc",
+        サスペンション: "ダブルウィッシュボーン",
+        世代: "300系 (11代目)",
+        セグメント: "フルサイズSUV",
+        生産工場: "トヨタ自動車 田原工場",
+        画像: "images/landcruiser.jpg"
+      },
+      harrier: {
+        名前: "ハリアー",
+        メーカー: "トヨタ",
+        定員: "5名",
+        車重: "1620kg",
+        サイズ: "4740×1855×1660mm",
+        パワーユニット: "2.0L NA / 2.5L ハイブリッド",
+        駅力: "171PS / 178PS",
+        トルク: "207Nm / 221Nm",
+        排氣量: "1986cc / 2487cc",
+        サスペンション: "マク\u30phファーストラット",
+        世代: "4代目",
+        セグメント: "ミドサイズSUV",
+        生産工場: "トヨタ自動車 立川工場",
+        画像: "images/harrier.jpg"
+      }
+    };
+
+    document.getElementById('carSelect').addEventListener('change', function() {
+      const val = this.value;
+      const car = carData[val];
+      const target = document.getElementById('carInfo');
+
+      if (!car) {
+        target.innerHTML = '';
+        return;
+      }
+
+      target.innerHTML = `
+        <h2>${car[名前]}</h2>
+        <img src="${car[画像]}" alt="${car[名前]}">
+        <ul>
+          <li><strong>メーカー:</strong> ${car[メーカー]}</li>
+          <li><strong>定員:</strong> ${car[定員]}</li>
+          <li><strong>車重:</strong> ${car[車重]}</li>
+          <li><strong>サイズ:</strong> ${car[サイズ]}</li>
+          <li><strong>パワーユニット:</strong> ${car[パワーユニット]}</li>
+          <li><strong>駅力:</strong> ${car[駅力]}</li>
+          <li><strong>トルク:</strong> ${car[トルク]}</li>
+          <li><strong>排氣量:</strong> ${car[排氣量]}</li>
+          <li><strong>サスペンション:</strong> ${car[サスペンション]}</li>
+          <li><strong>世代:</strong> ${car[世代]}</li>
+          <li><strong>セグメント:</strong> ${car[セグメント]}</li>
+          <li><strong>生産工場:</strong> ${car[生産工場]}</li>
+        </ul>
+      `;
+    });
+  </script>
+</body>
+</html>
