@@ -43,76 +43,57 @@
   <label for="carSelect">車種を選んでください：</label>
   <select id="carSelect">
     <option value="">-- 選択してください --</option>
-    <option value="landcruiser">ランドクルーザー</option>
-    <option value="harrier">ハリアー</option>
   </select>
 
   <div id="carInfo"></div>
 
   <script>
-    const carData = {
-      landcruiser: {
-        名前: "ランドクルーザー",
-        メーカー: "トヨタ",
-        定員: "5名",
-        車重: "2400kg",
-        サイズ: "4950×1980×1920mm",
-        パワーユニット: "V6ターボ",
-        馬力: "415PS",
-        トルク: "650Nm",
-        排気量: "3500cc",
-        サスペンション: "ダブルウィッシュボーン",
-        世代: "300系 (11代目)",
-        セグメント: "フルサイズSUV",
-        生産工場: "トヨタ自動車 田原工場",
-        画像: "images/landcruiser.jpg"
-      },
-      harrier: {
-        名前: "ハリアー",
-        メーカー: "トヨタ",
-        定員: "5名",
-        車重: "1620kg",
-        サイズ: "4740×1855×1660mm",
-        パワーユニット: "2.0L NA / 2.5L ハイブリッド",
-        馬力: "171PS / 178PS",
-        トルク: "207Nm / 221Nm",
-        排気量: "1986cc / 2487cc",
-        サスペンション: "マクファーソンストラット",
-        世代: "4代目",
-        セグメント: "ミドサイズSUV",
-        生産工場: "トヨタ自動車 立川工場",
-        画像: "images/harrier.jpg"
-      }
-    };
+    // 初期化：セレクトボックス生成
+    fetch('data/index.json')
+      .then(res => res.json())
+      .then(carList => {
+        const select = document.getElementById('carSelect');
+        carList.forEach(car => {
+          const option = document.createElement('option');
+          option.value = car.id;
+          option.textContent = car['名前'];
+          select.appendChild(option);
+        });
+      });
 
-    document.getElementById('carSelect').addEventListener('change', function() {
-      const val = this.value;
-      const car = carData[val];
-      const target = document.getElementById('carInfo');
-
-      if (!car) {
-        target.innerHTML = '';
+    document.getElementById('carSelect').addEventListener('change', function () {
+      const id = this.value;
+      const container = document.getElementById('carInfo');
+      if (!id) {
+        container.innerHTML = '';
         return;
       }
-
-      target.innerHTML = `
-        <h2>${car['名前']}</h2>
-        <img src="${car['画像']}" alt="${car['名前']}">
-        <ul>
-          <li><strong>メーカー:</strong> ${car['メーカー']}</li>
-          <li><strong>定員:</strong> ${car['定員']}</li>
-          <li><strong>車重:</strong> ${car['車重']}</li>
-          <li><strong>サイズ:</strong> ${car['サイズ']}</li>
-          <li><strong>パワーユニット:</strong> ${car['パワーユニット']}</li>
-          <li><strong>馬力:</strong> ${car['馬力']}</li>
-          <li><strong>トルク:</strong> ${car['トルク']}</li>
-          <li><strong>排気量:</strong> ${car['排気量']}</li>
-          <li><strong>サスペンション:</strong> ${car['サスペンション']}</li>
-          <li><strong>世代:</strong> ${car['世代']}</li>
-          <li><strong>セグメント:</strong> ${car['セグメント']}</li>
-          <li><strong>生産工場:</strong> ${car['生産工場']}</li>
-        </ul>
-      `;
+      fetch(`data/${id}.json`)
+        .then(res => res.json())
+        .then(car => {
+          container.innerHTML = `
+            <h2>${car['名前']}</h2>
+            <img src="${car['画像']}" alt="${car['名前']}">
+            <ul>
+              <li><strong>メーカー:</strong> ${car['メーカー']}</li>
+              <li><strong>定員:</strong> ${car['定員']}</li>
+              <li><strong>車重:</strong> ${car['車重']}</li>
+              <li><strong>サイズ:</strong> ${car['サイズ']}</li>
+              <li><strong>パワーユニット:</strong> ${car['パワーユニット']}</li>
+              <li><strong>馬力:</strong> ${car['馬力']}</li>
+              <li><strong>トルク:</strong> ${car['トルク']}</li>
+              <li><strong>排気量:</strong> ${car['排気量']}</li>
+              <li><strong>サスペンション:</strong> ${car['サスペンション']}</li>
+              <li><strong>世代:</strong> ${car['世代']}</li>
+              <li><strong>セグメント:</strong> ${car['セグメント']}</li>
+              <li><strong>生産工場:</strong> ${car['生産工場']}</li>
+            </ul>
+          `;
+        })
+        .catch(err => {
+          container.innerHTML = '<p style="color:red">データの読み込みに失敗しました。</p>';
+          console.error(err);
+        });
     });
   </script>
 </body>
