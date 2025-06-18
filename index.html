@@ -58,9 +58,9 @@
         車重: "2400kg",
         サイズ: "4950×1980×1920mm",
         パワーユニット: "V6ターボ",
-        駅力: "415PS",
+        馬力: "415PS",
         トルク: "650Nm",
-        排氣量: "3500cc",
+        排気量: "3500cc",
         サスペンション: "ダブルウィッシュボーン",
         世代: "300系 (11代目)",
         セグメント: "フルサイズSUV",
@@ -74,9 +74,9 @@
         車重: "1620kg",
         サイズ: "4740×1855×1660mm",
         パワーユニット: "2.0L NA / 2.5L ハイブリッド",
-        駅力: "171PS / 178PS",
+        馬力: "171PS / 178PS",
         トルク: "207Nm / 221Nm",
-        排氣量: "1986cc / 2487cc",
+        排気量: "1986cc / 2487cc",
         サスペンション: "マク\u30phファーストラット",
         世代: "4代目",
         セグメント: "ミドサイズSUV",
@@ -96,21 +96,21 @@
       }
 
       target.innerHTML = `
-        <h2>${car[名前]}</h2>
-        <img src="${car[画像]}" alt="${car[名前]}">
+        <h2>${car['名前']}</h2>
+        <img src="${car['画像']}" alt="${car['名前']}">
         <ul>
-          <li><strong>メーカー:</strong> ${car[メーカー]}</li>
-          <li><strong>定員:</strong> ${car[定員]}</li>
-          <li><strong>車重:</strong> ${car[車重]}</li>
-          <li><strong>サイズ:</strong> ${car[サイズ]}</li>
-          <li><strong>パワーユニット:</strong> ${car[パワーユニット]}</li>
-          <li><strong>駅力:</strong> ${car[駅力]}</li>
-          <li><strong>トルク:</strong> ${car[トルク]}</li>
-          <li><strong>排氣量:</strong> ${car[排氣量]}</li>
-          <li><strong>サスペンション:</strong> ${car[サスペンション]}</li>
-          <li><strong>世代:</strong> ${car[世代]}</li>
-          <li><strong>セグメント:</strong> ${car[セグメント]}</li>
-          <li><strong>生産工場:</strong> ${car[生産工場]}</li>
+          <li><strong>メーカー:</strong> ${car['メーカー']}</li>
+          <li><strong>定員:</strong> ${car['定員']}</li>
+          <li><strong>車重:</strong> ${car['車重']}</li>
+          <li><strong>サイズ:</strong> ${car['サイズ']}</li>
+          <li><strong>パワーユニット:</strong> ${car['パワーユニット']}</li>
+          <li><strong>馬力:</strong> ${car['馬力']}</li>
+          <li><strong>トルク:</strong> ${car['トルク']}</li>
+          <li><strong>排気量:</strong> ${car['排気量']}</li>
+          <li><strong>サスペンション:</strong> ${car['サスペンション']}</li>
+          <li><strong>世代:</strong> ${car['世代']}</li>
+          <li><strong>セグメント:</strong> ${car['セグメント']}</li>
+          <li><strong>生産工場:</strong> ${car['生産工場']}</li>
         </ul>
       `;
     });
